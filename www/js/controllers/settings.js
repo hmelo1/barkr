@@ -19,15 +19,15 @@ app.controller('SettingCtrl', function(Auth, $ionicPopup) {
     };
 
     sett.selectBigDog = function(){
-        
+        window.localStorage.setItem("bigDog", sett.bigDog);
     };
 
     sett.selectSmallDog = function(){
-        
+        window.localStorage.setItem("smallDog", sett.smallDog);
     };
 
     sett.selectMediumDog = function(){
-        
+        window.localStorage.setItem("mediumDog", sett.mediumDog);
     };
 
     sett.logout = function(){
