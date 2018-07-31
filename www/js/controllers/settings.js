@@ -29,6 +29,10 @@ app.controller('SettingCtrl', function(Auth, $ionicPopup){
             title: 'Logout',
             template: 'Do you want to logout?'
         })
-        Auth.logout();
+        .then(function(res){
+            if(res){
+                Auth.logout();
+            }
+        })
     };
 })
