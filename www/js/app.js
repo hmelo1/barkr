@@ -45,7 +45,21 @@ $stateProvider
   url: '/profile',
   views: {
     'menuContent': {
-      templateUrl: 'templates/profile.html'
+      templateUrl: 'templates/profile.html',
+      controller: 'ProfileCtrl as prof',
+      resolve: {
+        auth: function($state, Auth) {
+          return Auth.requireAuth().catch(function() {
+            $state.go('login');
+          });
+        },
+
+        profile: function(Auth) {
+          return Auth.requireAuth().then(function(auth) {
+            return Auth.getProfile(auth.uid).$loaded();
+          });
+        }
+      }
     }
   }
 })
@@ -63,7 +77,14 @@ $stateProvider
   url: '/settings',
   views: {
     'menuContent': {
-      templateUrl: 'templates/settings.html'
+      templateUrl: 'templates/settings.html',
+      resolve: {
+        auth: function($state, Auth) {
+          return Auth.requireAuth().catch(function() {
+            $state.go('login');
+          });
+        }
+      }
     }
   }
 });
