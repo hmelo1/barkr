@@ -1,7 +1,7 @@
 'use strict';
 
-app.controller('SettingCtrl', function(Auth, $ionicPopup){
-    var sett = this;
+app.controller('SettingCtrl', function(Auth, $ionicPopup) {
+	var sett = this;
 
     sett.maxAge = 25;
     sett.bigDog = false;
