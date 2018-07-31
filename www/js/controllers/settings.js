@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('SettingCtrl', function(Auth){
+app.controller('SettingCtrl', function(Auth, $ionicPopup){
     var sett = this;
 
     sett.maxAge = 25;
@@ -25,6 +25,10 @@ app.controller('SettingCtrl', function(Auth){
     };
 
     sett.logout = function(){
-        
+        $ionicPopup.confirm({
+            title: 'Logout',
+            template: 'Do you want to logout?'
+        })
+        Auth.logout();
     };
 })
