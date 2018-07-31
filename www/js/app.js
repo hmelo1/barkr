@@ -1,11 +1,11 @@
-  var config = {
-    apiKey: "AIzaSyCkBLvbbfLEZfFz6NxtCrGxPpFdGLfsMeE",
-    authDomain: "barkr-fbea4.firebaseapp.com",
-    databaseURL: "https://barkr-fbea4.firebaseio.com",
-    projectId: "barkr-fbea4",
-    storageBucket: "barkr-fbea4.appspot.com",
-    messagingSenderId: "288520692030"
-  };
+var config = {
+  apiKey: "AIzaSyCkBLvbbfLEZfFz6NxtCrGxPpFdGLfsMeE",
+  authDomain: "barkr-fbea4.firebaseapp.com",
+  databaseURL: "https://barkr-fbea4.firebaseio.com",
+  projectId: "barkr-fbea4",
+  storageBucket: "barkr-fbea4.appspot.com",
+  messagingSenderId: "288520692030"
+};
 firebase.initializeApp(config);
 
 var app = angular.module('starter', ['ionic', 'firebase'])
