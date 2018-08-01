@@ -12,7 +12,11 @@ app.factory('Like', function($firebaseArray) {
 
 		addLike: function(uid1, uid2) {
 			return ref.child('likes').child(uid1).child(uid2).set(true);
-		}
+        },
+        
+        removeLike: function(uid1, uid2){
+            return ref.child('likes').child(uid1).child(uid2).remove();
+        }
 	};
 
 	return Like;
