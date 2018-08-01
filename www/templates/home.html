@@ -3,15 +3,15 @@
         
         <div class="row">
             <div class="col col-50">
-                <button class="button button-block button-assertive icon icon-close" ng-click="home.nope()">
+                <button class="button button-block button-assertive icon icon-close" ng-click="home.nope(home.currentIndex)">
                     RUFF!
                 </button>
 
             </div>
             <div class="col col-50">
-                    <button class="button button-block button-balanced icon icon-close" ng-click="home.like()">
-                            PAW-SOME!
-                        </button>
+                    <button class="button button-block button-balanced icon icon-close" ng-click="home.like(home.currentIndex, home.currentCardUid)">
+                        PAW-SOME!
+                    </button>
             </div>
             
         </div>
@@ -22,7 +22,7 @@
             <td-card id="td-card" class="card-{{$index}}"
                 ng-repeat="profile in home.profiles"
                 on-swipe-left="home.nope($index)"
-                on-swipe-right="home.like($index)">
+                on-swipe-right="home.like($index, profile.$id)">
 
                 <div class="item item-image">
                     <div class="no-text">RUFF</div>

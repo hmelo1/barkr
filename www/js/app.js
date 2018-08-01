@@ -69,7 +69,21 @@ $stateProvider
   views: {
     'menuContent': {
       templateUrl: 'templates/home.html',
-      controller: 'HomeCtrl as home'
+      controller: 'HomeCtrl as home',
+      resolve: {
+        auth: function($state, Auth) {
+          return Auth.requireAuth().catch(function() {
+            $state.go('login');
+          });
+        },
+
+        uid: function(Auth){
+          return Auth.requireAuth()
+            .then(function(auth){
+              return auth.uid;
+            });
+        }
+      }
     }
   }
 })

@@ -47,7 +47,7 @@ app.factory('Auth', function($firebaseAuth, $firebaseObject, $firebaseArray, $st
                                     bio: data[3].data.about ? data[3].data.about : "",
                                     images: data[4].data.data
 								}
-								debugger;
+								
                                 Auth.createProfile(result.user.uid, profile);
                             });
                         }
