@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('MatchCtrl', function(Match, Auth, uid, $scope, Like){
+app.controller('MatchCtrl', function(Match, Auth, uid, $scope, Like, $ionicModal){
     
     var matc = this;
 
@@ -28,5 +28,20 @@ app.controller('MatchCtrl', function(Match, Auth, uid, $scope, Like){
 
         init();
     };
-    
+
+    $ionicModal.fromTemplateUrl('templates/message.html', {
+        scope: $scope
+    })
+    .then(function(modal){
+        $scope.modal = modal;
+    })
+
+    matc.openMessageModal = function(){
+        $scope.modal.show();
+    };
+
+    matc.closeMessageModal = function(){
+        $scope.modal.hide();
+    };
+
 })
