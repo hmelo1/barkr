@@ -1,31 +1,31 @@
 <ion-view view-title="Settings">
         <ion-content>
             <div class="list padding">
-                <div class="item item-divider">Show Age(18 - {{sett.maxAge}})</div>
+                <div class="item item-divider">Show Age(0 - {{sett.maxAge}})</div>
                 <div class="item range range-positive">
-                    18
-                        <input type="range" name="age", min="18" max="60" value="25" 
+                    0
+                        <input type="range" name="age", min="0" max="21" value="7" 
                         ng-model="sett.maxAge"
-                        on-release="sett.changeMaxAge()">60
+                        on-release="sett.changeMaxAge()">21
                 </div>
                 <div class="item item-divider">Show Me</div>
                 
                 <ion-toggle class="toggle-balanced"
                     ng-model="sett.smallDog"
                     ng-checked="{{sett.smallDog}}"
-                    ng-change="sett.selectSmallDog">
+                    ng-change="sett.selectSmallDog()">
                     Small Dogs
                 </ion-toggle>
                 <ion-toggle class="toggle-balanced"
                     ng-model="sett.mediumDog"
                     ng-checked="{{sett.mediumDog}}"
-                    ng-change="sett.selectMediumDog">
+                    ng-change="sett.selectMediumDog()">
                     Medium Dogs
                 </ion-toggle>
                 <ion-toggle class="toggle-balanced"
                     ng-model="sett.bigDog"
                     ng-checked="{{sett.bigDog}}"
-                    ng-change="sett.selectBigDog">
+                    ng-change="sett.selectBigDog()">
                     Big Dogs
                 </ion-toggle>
 

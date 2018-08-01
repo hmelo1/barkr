@@ -3,7 +3,7 @@
 app.controller('SettingCtrl', function(Auth, $ionicPopup) {
 	var sett = this;
 
-    sett.maxAge = window.localStorage.getItem("maxAge") || 25;
+    sett.maxAge = window.localStorage.getItem("maxAge") || 7;
     
     sett.bigDog = JSON.parse(window.localStorage.getItem("bigDog"));
     sett.bigDog = sett.bigDog === null ? true : sett.bigDog
@@ -14,6 +14,7 @@ app.controller('SettingCtrl', function(Auth, $ionicPopup) {
     sett.mediumDog = JSON.parse(window.localStorage.getItem("mediumDog"));
     sett.mediumDog = sett.mediumDog === null ? true : sett.mediumDog
 
+    debugger;
     sett.changeMaxAge = function(){
         window.localStorage.setItem("maxAge", sett.maxAge);
     };
