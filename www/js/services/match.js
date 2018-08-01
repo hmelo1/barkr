@@ -24,9 +24,17 @@ app.factory('Match', function($firebaseArray, $ionicPopup) {
 					});
 				}
 			})
-		}
+        },
+        
+        removeMatch:function(uid1, uid2){
+            ref.child('matches').child(uid1).child(uid2).remove();
+            ref.child('matches').child(uid2).child(uid1).remove();
+
+        }
 
 	};
+
+
 
 	return Match;
 
