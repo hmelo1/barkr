@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('HomeCtrl', function(Auth, $scope, Like, uid){
+app.controller('HomeCtrl', function(Auth, $ionicLoading, $scope, Like, uid){
     var home = this;
     home.currentIndex = null;
 
@@ -12,7 +12,20 @@ app.controller('HomeCtrl', function(Auth, $scope, Like, uid){
 
     var currentUid = uid;
 
+	$scope.show = function() {
+		$ionicLoading.show({
+			template: '<ion-spinner icon="bubbles"></ion-spinner>'
+		});
+	};
+
+	$scope.hide = function() {
+		$ionicLoading.hide();
+	}
+
     function init(){
+
+        $scope.show()
+
         home.profiles = [];
 
         maxAge = JSON.parse(window.localStorage.getItem('maxAge')) || 7;
@@ -32,14 +45,24 @@ app.controller('HomeCtrl', function(Auth, $scope, Like, uid){
                 var item = data[i];
 
                 if((item.gender == 'smallDog' && smallDog) || (item.gender == 'mediumDog' && mediumDog) || (item.gender == 'bigDog' && bigDog)){
-                    home.profiles.push(item);
+                    if(item.$id != currentUid){
+                        home.profiles.push(item);
+                    }
                 }
             }
+
+            Like.allLikesByUser(currentUid).$loaded().then(function(likesList) {
+				home.profiles = _.filter(home.profiles, function(obj) {
+					return _.isEmpty(_.where(likesList, {$id: obj.$id}));
+				});
+			});
 
             if(home.profiles.length > 0 ){
                 home.currentIndex = home.profiles.length - 1;
                 home.currentCardUid = home.profiles[home.currentIndex].$id;
             }
+
+            $scope.hide();
         });
     }
 
@@ -60,6 +83,7 @@ app.controller('HomeCtrl', function(Auth, $scope, Like, uid){
 
     home.cardRemoved = function(index){
         home.profiles.splice(index, 1);
+
         if(home.profiles.length > 0 ){
             home.currentIndex = home.profiles.length - 1;
             home.currentCardUid = home.profiles[home.currentIndex].$id;

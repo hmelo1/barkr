@@ -99,3 +99,11 @@ td-cards {
     transition: 0.2s opacity linear;
     opacity: 0;
   }
+
+
+  .spinner svg {
+      width: 30px;
+      height: 30px;
+      stroke: #fff;
+      fill: #fff;
+  }
