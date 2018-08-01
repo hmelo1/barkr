@@ -88,6 +88,30 @@ $stateProvider
   }
 })
 
+.state('app.match', {
+  url: '/match',
+  views: {
+    'menuContent': {
+      templateUrl: 'templates/match.html',
+      controller: 'MatchCtrl as matc',
+      resolve: {
+        auth: function($state, Auth) {
+          return Auth.requireAuth().catch(function() {
+            $state.go('login');
+          });
+        },
+
+        uid: function(Auth){
+          return Auth.requireAuth()
+            .then(function(auth){
+              return auth.uid;
+            });
+        }
+      }
+    }
+  }
+})
+
 .state('app.settings', {
   url: '/settings',
   views: {
