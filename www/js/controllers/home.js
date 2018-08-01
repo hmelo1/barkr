@@ -92,4 +92,18 @@ app.controller('HomeCtrl', function(Auth, $ionicLoading, $ionicModal, $scope, Li
         }
     };
 
+    $ionicModal.fromTemplateUrl('templates/info.html', {
+        scope: $scope
+    })
+    .then(function(modal){
+        $scope.modal = modal;
+    });
+
+    home.openModal = function(){
+        $scope.modal.show();
+    }
+
+    home.closeModal = function(){
+        $scope.modal.hide();
+    }
 })

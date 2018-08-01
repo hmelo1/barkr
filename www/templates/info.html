@@ -1,12 +1,14 @@
-<ion-nmodal-view>
-    <ion-header-bar>
-        <h1 class="title">
-            Profile
-        </h1>
-        <div class="buttons">
-            <button class="button button-clear" ng-click="home.closeModal()">
-                Close
-            </button>
-        </div>
-    </ion-header-bar>
-</ion-nmodal-view>
+<ion-modal-view>
+        <ion-header-bar>
+            <h1 class="title">Profile</h1>
+            <div class="buttons">
+                <button class="button button-clear icon ion-close" ng-click="home.closeModal()">Close</button>
+            </div>
+        </ion-header-bar>
+    
+        <ion-content>
+            <div class="item item-body">
+                This is a modal.
+            </div>
+        </ion-content>
+    </ion-modal-view>
