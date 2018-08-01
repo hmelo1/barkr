@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('MatchCtrl', function(Match, Auth, uid, $scope, Like, $ionicModal){
+app.controller('MatchCtrl', function(Match, Auth, uid, $scope, Like, $ionicModal, Messages, $ionicScrollDelegate, $timeout){
     
     var matc = this;
 
