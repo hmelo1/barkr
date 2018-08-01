@@ -69,6 +69,11 @@ app.factory('Auth', function($firebaseAuth, $firebaseObject, $firebaseArray, $st
 
 		getProfiles: function(){
 			return $firebaseArray(ref.child('profiles'));
+		},
+
+		getProfilesByAge: function(age){
+			//Adjust this when reducing dog age.
+			return $firebaseArray(ref.child('profiles').orderByChild('age').startAt(18).endAt(age))
 		}
 
     };
