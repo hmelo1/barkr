@@ -1,44 +1,46 @@
 'use strict';
 
-app.controller('MatchCtrl', function(Match, Auth, uid, $scope, Like, $ionicModal, Messages, $ionicScrollDelegate, $timeout){
-    
-    var matc = this;
+app.controller('MatchCtrl', function(Match, Auth, uid, profile, $scope, Like, Messages, $ionicModal, $ionicScrollDelegate, $timeout) {
 
-    matc.currentUser = profile;
-    matc.message = '';
-    var viewScroll = $ionicScrollDelegate.$getByHandle('userMessageScroll');
+	var matc = this;
 
-    function init(){
-        matc.list = [];
+	matc.currentUser = profile;
+	matc.message = '';
 
-        Match.allMatchesByUser(uid).$loaded().then(function(data){
-            for (var i = 0; i < data.length; i++){
-                var item = data[i];
+	var viewScroll = $ionicScrollDelegate.$getByHandle('userMessageScroll');
 
-                Auth.getProfile(item.$id).$loaded().then(function(profile){
-                    matc.list.push(profile);
-                })
-            }
-        });
-    };
+	function init() {
 
-    $scope.$on('$ionicView.enter', function(e){
-        init();
-    });
+		matc.list = [];
 
-    matc.unmatch = function(matchUid){
-        Like.removeLike(uid, matchUid);
-        Match.removeMatch(uid, matchUid);
+		Match.allMatchesByUser(uid).$loaded().then(function(data) {
+			for (var i = 0; i < data.length; i++) {
+				var item = data[i];
 
-        init();
-    };
+				Auth.getProfile(item.$id).$loaded().then(function(profile) {
+					matc.list.push(profile);
+				});
+			}
+		});
+	};
 
-    $ionicModal.fromTemplateUrl('templates/message.html', {
-        scope: $scope
-    })
-    .then(function(modal){
-        $scope.modal = modal;
-    })
+	$scope.$on('$ionicView.enter', function(e) {
+		init();
+	});
+
+	matc.unmatch = function(matchUid) {
+		Like.removeLike(uid, matchUid);
+		Match.removeMatch(uid, matchUid);
+
+		init();
+	};
+
+	$ionicModal.fromTemplateUrl('templates/message.html',{
+		scope: $scope
+	})
+		.then(function(modal){
+			$scope.modal = modal;
+		})
 
 	matc.openMessageModal = function(matchUid){
 		Auth.getProfile(matchUid).$loaded()
@@ -55,12 +57,11 @@ app.controller('MatchCtrl', function(Match, Auth, uid, $scope, Like, $ionicModal
 		})
 	};
 
+	matc.closeMessageModal = function(){
+		$scope.modal.hide();
+	};
 
-    matc.closeMessageModal = function(){
-        $scope.modal.hide();
-    };
-
-    matc.sendMessage = function(){
+	matc.sendMessage = function(){
 
 		if(matc.message.length > 0 ){
 				
@@ -76,5 +77,6 @@ app.controller('MatchCtrl', function(Match, Auth, uid, $scope, Like, $ionicModal
 			        }, 0);
 				})			
 		}
-	};
+	}
+
 })

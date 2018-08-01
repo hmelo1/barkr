@@ -48,6 +48,12 @@ $stateProvider
       templateUrl: 'templates/profile.html',
       controller: 'ProfileCtrl as prof',
       resolve: {
+        history: function($ionicHistory) {
+          $ionicHistory.nextViewOptions({
+            disableBack: true
+          });
+        },  
+
         auth: function($state, Auth) {
           return Auth.requireAuth().catch(function() {
             $state.go('login');
@@ -77,9 +83,9 @@ $stateProvider
           });
         },
 
-        uid: function(Auth){
+        uid: function(Auth) {
           return Auth.requireAuth()
-            .then(function(auth){
+            .then(function(auth) {
               return auth.uid;
             });
         }
@@ -88,6 +94,7 @@ $stateProvider
   }
 })
 
+
 .state('app.match', {
   url: '/match',
   views: {
@@ -95,18 +102,26 @@ $stateProvider
       templateUrl: 'templates/match.html',
       controller: 'MatchCtrl as matc',
       resolve: {
+        history: function($ionicHistory) {
+          $ionicHistory.nextViewOptions({
+            disableBack: true
+          });
+        },
+         
         auth: function($state, Auth) {
           return Auth.requireAuth().catch(function() {
             $state.go('login');
           });
         },
 
-        uid: function(Auth){
+        uid: function(Auth) {
           return Auth.requireAuth()
-            .then(function(auth){
+            .then(function(auth) {
+              Auth.setOnline(auth.uid);
               return auth.uid;
             });
         },
+
         profile: function(Auth){
           return Auth.requireAuth()
             .then(function(auth){

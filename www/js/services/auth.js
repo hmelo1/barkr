@@ -74,6 +74,23 @@ app.factory('Auth', function($firebaseAuth, $firebaseObject, $firebaseArray, $st
 		getProfilesByAge: function(age){
 			//Adjust this when reducing dog age.
 			return $firebaseArray(ref.child('profiles').orderByChild('age').startAt(0).endAt(age))
+		},
+		
+		setOnline: function(uid){
+			var connected = $firebaseObject(ref.child(".info/connected"));
+			var online = $firebaseObject(ref.child('profiles').child(uid));
+
+			connected.$watch(function(){
+				if(connected.$value === true){
+					ref.child('profiles').child(uid).update({
+						isOnline: true
+					});
+
+					online.$ref().onDisconnect().update({
+						isOnline: false
+					});
+				}
+			});
 		}
 
     };
