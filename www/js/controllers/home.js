@@ -100,6 +100,7 @@ app.controller('HomeCtrl', function(Auth, $ionicLoading, $ionicModal, $scope, Li
     });
 
     home.openModal = function(){
+        home.info = Auth.getProfile(home.currentCardUid);
         $scope.modal.show();
     }
 
