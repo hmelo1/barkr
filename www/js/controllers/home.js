@@ -37,4 +37,19 @@ app.controller('HomeCtrl', function(Auth, $scope){
     $scope.$on('$ionicView.enter', function(e){
         init();
     })
+
+    home.nope = function(index){
+        home.cardRemoved(index);
+        console.log('Nope!');
+    };
+    
+    home.like = function(index){
+        home.cardRemoved(index);
+        console.log('Like!');
+    };
+
+    home.cardRemoved = function(index){
+        home.profiles.splice(index, 1);
+    };
+
 })

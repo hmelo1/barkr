@@ -8,7 +8,7 @@ var config = {
 };
 firebase.initializeApp(config);
 
-var app = angular.module('starter', ['ionic', 'firebase'])
+var app = angular.module('starter', ['ionic', 'firebase', 'ionic.contrib.ui.tinderCards'])
 
 .run(function($ionicPlatform) {
 $ionicPlatform.ready(function() {
