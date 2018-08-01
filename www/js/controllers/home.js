@@ -2,6 +2,8 @@
 
 app.controller('HomeCtrl', function(Auth, $scope){
     var home = this;
+    home.currentIndex = null;
+
 
     var maxAge = null;
     var smallDog = null;
@@ -26,10 +28,14 @@ app.controller('HomeCtrl', function(Auth, $scope){
         Auth.getProfilesByAge(maxAge).$loaded().then(function(data){
             for (var i = 0; i < data.length; i++){
                 var item = data[i];
-                debugger;
+                
                 if((item.gender == 'smallDog' && smallDog) || (item.gender == 'mediumDog' && mediumDog) || (item.gender == 'bigDog' && bigDog)){
                     home.profiles.push(item);
                 }
+            }
+
+            if(home.profiles.length > 0 ){
+                home.currentIndex = home.profiles.length - 1;
             }
         });
     }
@@ -50,6 +56,9 @@ app.controller('HomeCtrl', function(Auth, $scope){
 
     home.cardRemoved = function(index){
         home.profiles.splice(index, 1);
+        if(home.profiles.length > 0 ){
+            home.currentIndex = home.profiles.length - 1;
+        }
     };
 
 })
