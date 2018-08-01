@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('HomeCtrl', function(Auth, $ionicLoading, $scope, Like, Match, uid){
+app.controller('HomeCtrl', function(Auth, $ionicLoading, $ionicModal, $scope, Like, Match, uid){
     var home = this;
     home.currentIndex = null;
 
@@ -78,7 +78,7 @@ app.controller('HomeCtrl', function(Auth, $ionicLoading, $scope, Like, Match, ui
     home.like = function(index, like_uid){
         Like.addLike(currentUid, like_uid);
         Match.checkMatch(currentUid, like_uid);
-        
+
         home.cardRemoved(index);
         console.log('Like!');
     };
