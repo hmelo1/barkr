@@ -14,7 +14,6 @@ app.controller('SettingCtrl', function(Auth, $ionicPopup) {
     sett.mediumDog = JSON.parse(window.localStorage.getItem("mediumDog"));
     sett.mediumDog = sett.mediumDog === null ? true : sett.mediumDog
 
-    debugger;
     sett.changeMaxAge = function(){
         window.localStorage.setItem("maxAge", sett.maxAge);
     };
